@@ -25,12 +25,15 @@ SECRET_KEY = 'django-insecure-jbw&knkl3b9k=pe6j=1ti%-#q__b8iao4+zwextw9lzd^amv=q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+  
+    'account',
+ 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,8 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # local app
-    'account',
-    'shop',
+    "shop",
     'cart',
    
 
@@ -119,6 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -141,3 +144,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CART_SESSION_ID = 'cart'
+
+LOGIN_REDIRECT_URL = 'shop:product_list'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
