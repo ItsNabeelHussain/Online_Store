@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <title>{% block title %}My shop{% endblock %}</title>
@@ -10,23 +11,96 @@
     .logout {
       position: absolute;
       top: 10px;
-      right: 50px; /* Adjust the right value to position the logout option */
+      right: 50px;
+      /* Adjust the right value to position the logout option */
+    }
+
+    .profile-icon {
+      position: absolute;
+      top: 10px;
+      right: -1400px;
+      /* Adjust the right value to position the profile icon */
+      display: inline-block;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      right: 0;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      z-index: 1;
+    }
+
+    .profile-icon:hover .dropdown,
+    .dropdown.active {
+      display: block;
+    }
+
+    .profile-image {
+      width: 30px;
+      /* Adjust the width of the profile image */
+      height: 30px;
+      /* Adjust the height of the profile image */
+      border-radius: 50%;
     }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var profileIcon = document.querySelector('.profile-icon');
+      var dropdown = document.querySelector('.dropdown');
+
+      profileIcon.addEventListener('click', function () {
+        dropdown.classList.toggle('active');
+      });
+
+      window.addEventListener('click', function (event) {
+        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </head>
+
 <body>
   <div id="header">
     <a href="/" class="logo">My shop</a>
     {% if user.is_authenticated %}
-      <a href="{% url 'logout' %}?next={% url 'login' %}" class="logout">Logout</a>
+    <div class="profile-icon">
+      <a href="{% url 'edit' %}">
+        <img src="{{ user.profile.photo.url }}" alt="Profile Image" class="profile-image" />
+      </a>
+      <div class="dropdown">
+        <ul>
+          <li><a href="{% url 'logout' %}?next={% url 'login' %}">Logout</a></li>
+        </ul>
+      </div>
+    </div>
     {% endif %}
   </div>
   <div id="subheader">
-    <div class="cart">Your cart is empty.</div>
+    <div class="cart">
+      {% with total_items=cart|length %}
+      {% if total_items > 0 %}
+      Your cart:
+      <a href="{% url 'cart:cart_detail' %}">
+        {{ total_items }} item{{ total_items|pluralize }},
+        ${{ cart.get_total_price }}
+      </a>
+      {% else %}
+      Your cart is empty.
+      {% endif %}
+      {% endwith %}
+    </div>
   </div>
   <div id="content">
     {% block content %} {% endblock %}
   </div>
-   
 </body>
+
 </html>
