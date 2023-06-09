@@ -14,6 +14,7 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
 
     class Meta:
+
         ordering = ['-created']
         indexes = [
             models.Index(fields=['-created']),
@@ -27,6 +28,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+
     order = models.ForeignKey(Order,
                               related_name='items',
                               on_delete=models.CASCADE)

@@ -21,14 +21,17 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path("account/", include('account.urls')),
 
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('payment/', include('payment.urls', namespace='payment')),
 
     path('', include('shop.urls', namespace='shop')),
     path('__debug__/', include('debug_toolbar.urls')),
+    
 ]
 
 if settings.DEBUG:

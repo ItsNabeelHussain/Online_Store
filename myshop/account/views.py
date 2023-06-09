@@ -30,6 +30,7 @@ class CustomPasswordChangeView(PasswordChangeView):
     template_name = 'registration/password_change_form.html'
 
 
+@login_required
 def edit(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
@@ -48,3 +49,4 @@ def edit(request):
                   'account/edit.html',
                   {'user_form': user_form,
                    'profile_form': profile_form})
+ 
