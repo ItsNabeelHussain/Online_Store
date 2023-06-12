@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-jbw&knkl3b9k=pe6j=1ti%-#q__b8iao4+zwextw9lzd^amv=q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1","3196-202-166-170-106.ngrok-free.app"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -167,7 +167,7 @@ AUTHENTICATION_BACKENDS = [
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-CSRF_TRUSTED_ORIGINS = ['https://3196-202-166-170-106.ngrok-free.app']
+# CSRF_TRUSTED_ORIGINS = ['https://3196-202-166-170-106.ngrok-free.app']
 
 # AUTH_USER_MODEL = 'account.CustomUser'
 # Stripe settings
@@ -175,3 +175,7 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_51KnJm7InSFbjN8BpIidcpQfYbyUqv6JTFGFzINzz9oyMd
 STRIPE_SECRET_KEY = 'sk_test_51KnJm7InSFbjN8BpF2tmq2CiQ5YuL7LW6os9NtwXM8P5yiK0sE1xOy1p9oaM7l8pMCGSIDFhKSDJEJ5RmKShoZ2w004TLll2H1'
 # Secret key
 STRIPE_API_VERSION = '2022-08-01'
+
+
+
+STRIPE_WEBHOOK_SECRET = 'whsec_023587eb50f520792be15c5dc906390ba4ff5595f471d7c5b5ac69303b0071ba'
