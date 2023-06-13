@@ -26,5 +26,8 @@ def stripe_webhook(request):
             except Order.DoesNotExist:
                 return HttpResponse(status=404)
             order.paid = True
+
+            # store stripe payment id
+            order.stripe_id = session.payment_intent
             order.save()
     return HttpResponse(status=200)
