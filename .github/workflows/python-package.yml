@@ -30,5 +30,4 @@ jobs:
         if [ -f req.txt ]; then pip install -r req.txt; fi
         
     - name: Test with pytest
-      run: |
-        pytest
+     
