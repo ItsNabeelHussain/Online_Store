@@ -9,6 +9,9 @@ from .forms import CustomPasswordChangeForm
 from django.contrib import messages
 
 
+
+
+
 def register(request):
 
     if request.method == "POST":
